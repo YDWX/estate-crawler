@@ -3,7 +3,7 @@ const fs = require('fs')
 const mongoose = require('mongoose')
 const setting = require('../config-template/database.json').development
 // mongodb 连接?
-mongoose.connect('mongodb://localhost/tifi-music' `mongodb://${setting.host}:${setting.port}/${setting.database}`)
+mongoose.connect(`mongodb://${setting.host}:${setting.port}/${setting.database}`)
 // 此处防止 node.js - Mongoose: mpromise 错误
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
