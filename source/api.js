@@ -1,5 +1,6 @@
 module.exports = {
-  "nova-terra": {
+  "novaTerra": {
+    agency: 'nova-terra',
     active: true,
     page: {
       min: 1,
