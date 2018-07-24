@@ -1,7 +1,7 @@
 const cheerio = require('cheerio')
 const request = require('request-promise')
 const _ = require('lodash')
-// const houseController = require('../controller/houseController')
+const houseController = require('../controller/houseController')
 class NovaTerra {
   constructor() {
     // empty
@@ -53,11 +53,10 @@ class NovaTerra {
     const houseId = $('.property-id')
       .text()
       .substr(3)
-    console.log('价格：' + price + ' 编号：' + houseId)
     // 复式公寓 出售 Center (Voula), € 280,000, 110 平方米 -> ["复式公寓", "出售", "Center", "(Voula),", "€", "280,000,", "110", "平方米"]
     const titleArr = $('#page h1').text().split(' ') 
     const name = titleArr[0] + titleArr[1]
-    const size = titleArr[6]
+    const size = parseInt(titleArr[titleArr.length-2])
     const imgsEle = $('#property-gallery img')
     const picGallery = []
     _.forEach(imgsEle, (imgele) => {
@@ -88,7 +87,7 @@ class NovaTerra {
     this.houseData.name = name
     this.houseData.size = parseFloat(size)
     this.debug = ''
-    // houseController.create(this.houseData)
+    houseController.create(this.houseData)
   }
   getFromUrl(url) {
     this.options = {

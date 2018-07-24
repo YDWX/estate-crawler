@@ -1,3 +1,0 @@
-port = 13002
-dbpath = data
-logpath = log/mongod.log

@@ -5,7 +5,6 @@ module.exports = {
   create(houseData) {
     model.house
       .create(houseData)
-      .exec()
       .then((result) => {
       })
   }

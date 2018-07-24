@@ -1,3 +1,6 @@
+housedata/log
+housedata/conf
+housedata/data
 # Logs
 logs
 *.log

@@ -14,12 +14,12 @@ db.once('open', function() {
 //声明待添加的model对象
 let model = {}
 //读取方式和router一样
-const schemas = fs.readdirSync(path.resolve(__dirname, './model'))
+const schemas = fs.readdirSync(path.resolve(__dirname, './'))
 schemas.forEach((file) => {
     //设置数据库表名为读取到的文件名(去除后缀名)
     let name = file.substring(0,file.lastIndexOf("."))
     //获取到的对象就是数据库字段
-    let schema = require('./model/' + file)
+    let schema = require('./' + file)
     //使用mongoose.Schema和mongoose.model完成对数据库表和字段的创建
     model[name] = mongoose.model(name, mongoose.Schema(schema))
 })
