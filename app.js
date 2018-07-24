@@ -1,7 +1,7 @@
 const request = require('request-promise')
 const cheerio = require('cheerio')
 const _ = require('lodash')
-// const mongoose = require('./models/index')
+const mongoose = require('./models/index')
 const sources = require('./source/api')
 const mod = require('./modules')
 

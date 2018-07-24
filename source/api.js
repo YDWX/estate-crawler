@@ -9,6 +9,7 @@ module.exports = {
     listApi: 'https://www.nova-terra.gr/zh/fangdichan/chazhao?listingType=sale&category=residential&region=102&municipality%5B0%5D=0&roomsLow=nd&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&page=' //后面接页码
   },
   goldenhome: {
+    agency: 'goldenhome',
     active: false,
     page: {
       min: 1,
@@ -17,6 +18,7 @@ module.exports = {
     listApi: 'https://www.nova-terra.gr/zh/fangdichan/chazhao?listingType=sale&category=residential&region=102&municipality%5B0%5D=0&roomsLow=nd&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&page=' //后面接页码
   },
   xerg: {
+    agency: 'xe.gr',
     active: false,
     page: {
       min: 1,

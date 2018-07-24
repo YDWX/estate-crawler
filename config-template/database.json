@@ -1,11 +1,11 @@
 {
   "production": {
-    "database": "estste",
+    "database": "estate",
     "host": "127.0.0.1",
     "port": "27017"
   },
   "development": {
-    "database": "estste",
+    "database": "estate",
     "host": "127.0.0.1",
     "port": "27017"
   }

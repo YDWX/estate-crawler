@@ -1,6 +1,8 @@
 housedata/log
 housedata/conf
 housedata/data
+csvResult
+config
 # Logs
 logs
 *.log

@@ -4,13 +4,17 @@
   "description": "这是房产网站房产信息爬虫",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "app": "nodemon ./app/js",
+    "tocsv": "nodemon ./createCsv.js"
   },
   "author": "nonym",
   "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "json2csv": "^4.1.6",
     "lodash": "^4.17.10",
+    "log4js": "^3.0.2",
     "mongoose": "^5.2.4",
     "morgan": "^1.9.0",
     "request": "^2.87.0",
