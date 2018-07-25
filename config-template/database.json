@@ -2,11 +2,15 @@
   "production": {
     "database": "estate",
     "host": "127.0.0.1",
-    "port": "27017"
+    "port": "27017",
+    "user": "nonym",
+    "password": "ZhWy197531"
   },
   "development": {
     "database": "estate",
     "host": "127.0.0.1",
-    "port": "27017"
+    "port": "27017",
+    "user": "nonym",
+    "password": "ZhWy197531"
   }
 }
