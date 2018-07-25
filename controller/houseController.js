@@ -2,7 +2,9 @@ const model = require('../models/index')
 
 module.exports = {
   create(houseData) {
-    model.house.create(houseData).then((result) => {})
+    model.house.create(houseData).then((result) => {
+
+    })
   },
   getHouses(query) {
     query = query||{}
