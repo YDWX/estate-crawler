@@ -5,9 +5,12 @@ module.exports = {
     const { houseId, agency } = houseData
     model.house
       .findOneAndUpdate({ houseId, agency }, { $set: houseData }, { upsert: true })
-      .exec()
       .then((result) => {
-        logger.info(`upsert result: ${result}`)
+        if(result){
+          logger.debug(`update success`)
+        }else {
+          logger.debug(`insert success`)
+        }
       })
     // model
     //   .findOne({ houseId, agency })

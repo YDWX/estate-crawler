@@ -22,7 +22,12 @@ class NovaTerra {
       place: '', // 地点
       size: null, // 面积 110（不带单位）
       agency: '', // 中介
-      contact: '', //302109601909
+      contactName: '', // 联系人姓名
+      contact: '', //302109601909 电话号码
+      email: '', //邮箱
+      phone: '', //手机号
+      fax: '', // 传真
+      officeLoc: '', // 办公室位置
       originalURL: '', // 原始信息链接
       price: '',
       priceperm: '', // 单位欧元
@@ -40,9 +45,18 @@ class NovaTerra {
   }
   init(url) {
     this.url = url
-    this.houseData.agency = 'nova-terra'
-    ;(this.houseData.contact = '2108983470, 2108943120'), (this.houseData.unitOfPrice = '€')
-    this.houseData.originalURL = url
+    const fixed = {
+      agency: 'nova-terra',
+      contact: '2108983470, 2108943120',
+      unitOfPrice: '€',
+      contactName: 'Anthi Lisgari',
+      email: 'notifications@nova-terra.gr',
+      phone: '6956307989',
+      fax: '2108983190',
+      officeLoc: 'Agg.Metaxa 33,',
+      originalURL: url
+    }
+    this.houseData = Object.assign(this.houseData, fixed)
     return this
   }
   // .property-price->price #property-gallery img->图片
@@ -54,9 +68,11 @@ class NovaTerra {
       .text()
       .substr(3)
     // 复式公寓 出售 Center (Voula), € 280,000, 110 平方米 -> ["复式公寓", "出售", "Center", "(Voula),", "€", "280,000,", "110", "平方米"]
-    const titleArr = $('#page h1').text().split(' ') 
+    const titleArr = $('#page h1')
+      .text()
+      .split(' ')
     const name = titleArr[0] + titleArr[1]
-    const size = parseInt(titleArr[titleArr.length-2])
+    const size = parseInt(titleArr[titleArr.length - 2])
     const imgsEle = $('#property-gallery img')
     const picGallery = []
     _.forEach(imgsEle, (imgele) => {
@@ -66,6 +82,14 @@ class NovaTerra {
     // for (var i = 0; i < imgsEle.length; i++) {
     //   picGallery.push($(imgsEle[i]).attr('src'))
     // }
+    const fixed = {
+      contact: $($('.fa-phone').parent()[0]).text().trim(),
+      contactName: $('.fa-user').parent().text().trim(),
+      phone: $('.fa-mobile').parent().text().trim(),
+      email: $($('.fa-envelope').parent()[0]).text().trim(),
+      fax: $('.fa-fax').parent().text().trim(),
+      officeLoc: $('.fa-map-marker').parent().text().split(',')[0],
+    }
     const propertiesTrs = $('.property-features-table table tr')
     const curAllo = [] // 存储现有配置
     _.forEach(propertiesTrs, (item) => {
@@ -87,6 +111,7 @@ class NovaTerra {
     this.houseData.name = name
     this.houseData.size = parseFloat(size)
     this.debug = ''
+    this.houseData = Object.assign(this.houseData, fixed)
     houseController.create(this.houseData)
   }
   getFromUrl(url) {

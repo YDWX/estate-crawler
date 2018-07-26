@@ -21,34 +21,34 @@ _.forIn(sources, (value, key) => {
     },
     qs: query
   }
-  request.get(options).then(($) => {
-    return getMaxPage($)
-  }).then((maxP) => {
-
-    // 正式程序
-    _.forEach(_.range(1, maxP, 1), (page) => {
-      query.page = page
-      const options = {
-        url: host,
-        transform: (body) => {
-          return cheerio.load(body)
-        },
-        query
-      }
-      const HouseDealer = mod.novaTerra
-      request.get(options).then(($) => {
-  
-        const hosueList = $('#property-listing .listing-item') // .listing-image->url h4>a->名称 .listing-item-code->代码
-        const promiseArr = []
-        _.forEach(hosueList, (house, index) => {
-          const houseUrl = $(house)
-            .find('.listing-image')
-            .attr('href')
-          promiseArr.push(HouseDealer.init(houseUrl).deal())
+  request
+    .get(options)
+    .then(($) => {
+      return getMaxPage($)
+    })
+    .then((maxP) => {
+      // 正式程序
+      _.forEach(_.range(1, maxP + 1, 1), (page) => {
+        query.page = page
+        const options = {
+          url: host,
+          transform: (body) => {
+            return cheerio.load(body)
+          },
+          qs: query
+        }
+        const HouseDealer = mod.novaTerra
+        request.get(options).then(($) => {
+          const hosueList = $('#property-listing .listing-item') // .listing-image->url h4>a->名称 .listing-item-code->代码
+          const promiseArr = []
+          _.forEach(hosueList, (house, index) => {
+            const houseUrl = $(house)
+              .find('.listing-image')
+              .attr('href')
+            promiseArr.push(HouseDealer.init(houseUrl).deal())
+          })
+          Promise.all(promiseArr)
         })
-        Promise.all(promiseArr)
       })
     })
-  })
-
 })
