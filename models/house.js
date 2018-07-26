@@ -5,7 +5,12 @@ module.exports = {
   size: Number, // 面积 110（不带单位）
   title: String, // 由上面三个字段组成
   agency: String, // 中介
-  contact: String, //302109601909
+  contactName: String, // 联系人姓名
+  contact: String, //302109601909 电话号码
+  email: String, //邮箱
+  phone: String,//手机号
+  fax: String, // 传真
+  officeLoc: String, // 办公室位置
   originalURL: String, // 原始信息链接
   price: String, // 总价
   priceperm: String, // 单位欧元
