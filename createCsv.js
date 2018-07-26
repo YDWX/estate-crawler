@@ -31,13 +31,13 @@ _.forEach(sources, (item) => {
         house.place
       }`
       const price = parseInt(house.price.split(',').join(''))
-      const desc = `中介：${house.agency}\n联系方式：${house.contact}\n原信息链接：<a href='${
-        house.originalURL
-      }'>${house.originalURL}</a>\n综合信息\n${house.name}\n价格：${price}欧元\n楼层：${
+      const desc = `中介：${house.agency}\n联系方式\n电话：${house.contact}\n手机号：${house.phone}\n邮箱：${house.email}\n官网链接：<a target='_blank' href='${
+        item.enHost
+      }'>点击跳转</a>\n综合信息\n${house.name}\n价格：${price}欧元\n楼层：${
         house.floor
       }楼\n配置：${house.allocation.join(',')}\n建筑时间${house.buildYear}年\n情况：${
         house.condition
-      }`
+      }\n更多信息请直接与发布者联系\n本网站温馨提醒：骗子手段多，投资需谨慎`
       const imgs = house.picGallery.join(', ')
       const houseTem = {
         类型: 'simple',
