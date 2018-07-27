@@ -24,7 +24,5 @@ module.exports = {
   allocation: Array, // 配置：停车位，浴室，洗手间等等
   warmSys: String,
   condition: String,
-  disable: { type: Boolean, default: false },
-  createdAt: { type: Date, default: new Date() },
-  createdAt: { type: Date, default: new Date() }
+  disable: { type: Boolean, default: false }
 }
