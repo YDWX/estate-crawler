@@ -37,7 +37,7 @@ _.forIn(sources, (value, key) => {
           },
           qs: query
         }
-        const HouseDealer = mod.novaTerra
+        const HouseDealer = mod[key]
         request.get(options).then(($) => {
           const hosueList = $('#property-listing .listing-item') // .listing-image->url h4>a->名称 .listing-item-code->代码
           const promiseArr = []
