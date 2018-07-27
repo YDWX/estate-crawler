@@ -5,8 +5,9 @@ const logger = require('./logger')
 const mongoose = require('./models/index')
 const houseController = require('./controller/houseController')
 const sources = require('./source/api')
-const fields = ['类型', '名称', '描述', '常规售价', '图片']
+const fields = ['类型', '名称', '描述', '常规售价', '图片', '属性 1 名称', '属性 1 值', '属性 1 可见', '属性 1 的全局']
 const opts = { fields }
+
 // [
 //   {
 //     "类型": "simple",
@@ -44,7 +45,11 @@ _.forEach(sources, (item) => {
         名称: name,
         描述: desc,
         常规售价: price,
-        图片: imgs
+        图片: imgs,
+        '属性 1 名称': '中介',
+        '属性 1 值': house.agency,
+        '属性 1 可见': '1',
+        '属性 1 的全局': '1'
       }
       csvOriginData.push(houseTem)
     })
