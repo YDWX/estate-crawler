@@ -20,6 +20,7 @@ module.exports = {
   kind: String, // 房屋分类
   buildYear: String, // 建造年份
   floor: String, // 楼层
+  floorCount: String, // 楼层
   detail: String, // 详细信息以table的html先存储，同时进行分析
   allocation: Array, // 配置：停车位，浴室，洗手间等等
   warmSys: String,

@@ -27,7 +27,7 @@ const parse = ($, _this) => {
   const imgsEle = $('#property-gallery img')
   const picGallery = []
   _.forEach(imgsEle, (imgele) => {
-    picGallery.push($(imgele).attr('src'))
+    picGallery.push($(imgele).attr('src').split('?')[0])
   })
   _this.houseData.picGallery = picGallery
   // for (var i = 0; i < imgsEle.length; i++) {
@@ -68,18 +68,34 @@ const parse = ($, _this) => {
       .find('td')
       .text()
     if (_this.zhcnToEn[key]) {
-      _this.houseData[_this.zhcnToEn[key]] = value
+      if(key=='楼层'){
+        if(!!parseInt(value)){
+          _this.houseData.floorCount = value
+        }else{
+          _this.houseData.floor = value
+        }
+      }else{
+        _this.houseData[_this.zhcnToEn[key]] = value
+      }
     } else if (_this.allocationAll.includes(key)) {
       curAllo.push(key)
     }
   })
-  _this.houseData.allocation = curAllo
-  _this.houseData.price = price
-  _this.houseData.houseId = houseId
-  _this.houseData.name = name
-  _this.houseData.size = parseFloat(size)
-  _this.debug = ''
-  _this.houseData = Object.assign(_this.houseData, _this.fixed)
+
+  const propertyAmenities = $('.property-amenities li')
+  _.forEach(propertyAmenities, (item) => {
+    const onePro = $(item).text().replace(/ |\n/g, '')
+    curAllo.push(onePro)
+  })
+  const currentValue = {
+    allocation: curAllo,
+    price,
+    houseId,
+    name,
+    size: parseFloat(size)
+  }
+
+  _this.houseData = Object.assign(_this.houseData, _this.fixed, currentValue)
   houseController.create(_this.houseData)
 }
 module.exports = construct({ parse, fixed })

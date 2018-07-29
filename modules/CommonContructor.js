@@ -40,6 +40,7 @@ class NovaTerra {
       kind: '', // 房屋分类
       buildYear: '', // 建造年份
       floor: '', // 楼层
+      floorCount: '',// 楼层数
       detail: '', // 详细信息以table的html先存储，同时进行分析
       allocation: [], // 配置：停车位，浴室，洗手间等等
       warmSys: '',
@@ -61,7 +62,8 @@ class NovaTerra {
       url: url,
       transform: (body) => {
         return cheerio.load(body)
-      }
+      },
+      timeout: 30000
     }
     return request.get(this.options)
   }

@@ -5,60 +5,57 @@ const fixed = {
   agency: 'plasisrealestate',
   contact: '302109601909, 302109601609',
   unitOfPrice: '€',
-  contactName: 'Anthi Lisgari',
+  contactName: '',
   email: 'info@plasis.com.gr',
-  phone: '6956307989',
-  fax: '2108983190',
+  phone: '',
+  fax: '',
   officeLoc: '32, El. Venizelou Str, 166 75 Glyfada, Athens'
 }
 const parse = ($, _this) => {
-  const price = $('.property-price')
+  const price = $('.price')
     .text()
     .substr(2)
-  const houseId = $('.property-id')
+  const houseId = $('.property-code')
     .text()
-    .substr(3)
+    .substring(3)
   // 复式公寓 出售 Center (Voula), € 280,000, 110 平方米 -> ["复式公寓", "出售", "Center", "(Voula),", "€", "280,000,", "110", "平方米"]
-  const titleArr = $('#page h1')
+  const titleArr = $('.property-content h1')
     .text()
     .split(' ')
   const name = titleArr[0] + titleArr[1]
-  const size = parseInt(titleArr[titleArr.length - 2])
-  const imgsEle = $('#property-gallery img')
+  const size = parseInt(
+    $('.area')
+      .text()
+      .replace(' 平方米', '')
+  )
+  const imgsEle = $('.swiper-lazy')
   const picGallery = []
   _.forEach(imgsEle, (imgele) => {
-    picGallery.push($(imgele).attr('src'))
+    picGallery.push(
+      $(imgele)
+        .attr('data-background')
+        .split('?')[0]
+    )
   })
   _this.houseData.picGallery = picGallery
   // for (var i = 0; i < imgsEle.length; i++) {
   //   picGallery.push($(imgsEle[i]).attr('src'))
   // }
   const fixedChange = {
-    contact: $($('.fa-phone').parent()[0])
-      .text()
-      .trim(),
-    contactName: $('.fa-user')
-      .parent()
-      .text()
-      .trim(),
-    phone: $('.fa-mobile')
+    contact: $('.fa-phone')
       .parent()
       .text()
       .trim(),
     email: $($('.fa-envelope').parent()[0])
       .text()
       .trim(),
-    fax: $('.fa-fax')
-      .parent()
-      .text()
-      .trim(),
     officeLoc: $('.fa-map-marker')
       .parent()
       .text()
-      .split(',')[0]
+      .trim()
   }
   _this.fixed = Object.assign(_this.fixed, fixedChange)
-  const propertiesTrs = $('.property-features-table table tr')
+  const propertiesTrs = $('.info-table tr')
   const curAllo = [] // 存储现有配置
   _.forEach(propertiesTrs, (item) => {
     const key = $(item)
@@ -68,7 +65,15 @@ const parse = ($, _this) => {
       .find('td')
       .text()
     if (_this.zhcnToEn[key]) {
-      _this.houseData[_this.zhcnToEn[key]] = value
+      if (key == '楼层') {
+        if (!!parseInt(value)) {
+          _this.houseData.floorCount = value
+        } else {
+          _this.houseData.floor = value
+        }
+      } else {
+        _this.houseData[_this.zhcnToEn[key]] = value
+      }
     } else if (_this.allocationAll.includes(key)) {
       curAllo.push(key)
     }
@@ -76,7 +81,9 @@ const parse = ($, _this) => {
 
   const propertyAmenities = $('.property-amenities li')
   _.forEach(propertyAmenities, (item) => {
-    const onePro = $(item).text().replace(/ |\n/g, '')
+    const onePro = $(item)
+      .text()
+      .replace(/ |\n/g, '')
     curAllo.push(onePro)
   })
   const currentValue = {
@@ -84,7 +91,7 @@ const parse = ($, _this) => {
     price,
     houseId,
     name,
-    size: parseFloat(size)
+    size
   }
 
   _this.houseData = Object.assign(_this.houseData, _this.fixed, currentValue)

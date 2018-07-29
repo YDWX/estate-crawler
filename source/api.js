@@ -1,7 +1,7 @@
 module.exports = {
   novaTerra: {
     agency: 'nova-terra',
-    active: true,
+    active: false,
     enHost: 'https://www.nova-terra.gr/en',
     host: 'https://www.nova-terra.gr/zh/fangdichan/chazhao',
     listApi:
@@ -21,6 +21,14 @@ module.exports = {
         .split('\n')[0]
       const pageCount = parseInt(a.substring(a.length - 2))
       return pageCount
+    },
+    getHouseList() {
+      return $('#property-listing .listing-item')
+    },
+    getHouseUrl($, house) {
+      return $(house)
+      .find('.listing-image')
+      .attr('href')
     }
   },
   goldenhome: {
@@ -30,7 +38,13 @@ module.exports = {
       'https://www.nova-terra.gr/zh/fangdichan/chazhao?listingType=sale&category=residential&region=102&municipality%5B0%5D=0&roomsLow=nd&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&page=', //后面接页码
     enHost: '',
     query: {},
-    getMaxPage($) {}
+    getMaxPage($) {},
+    getHouseList() {
+
+    },
+    getHouseUrl($) {
+      return 
+    }
   },
   xegr: {
     agency: 'xe.gr',
@@ -40,16 +54,38 @@ module.exports = {
       'https://www.nova-terra.gr/zh/fangdichan/chazhao?listingType=sale&category=residential&region=102&municipality%5B0%5D=0&roomsLow=nd&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&page=', //后面接页码
     enHost: '',
     query: {},
-    getMaxPage($) {}
+    getMaxPage($) {},
+    getHouseList() {
+
+    },
+    getHouseUrl($) {
+      return 
+    }
   },
   plasisrealestate: {
     agency: 'plasisrealestate',
-    active: false,
-    host: '',
+    active: true,
+    host: 'https://www.plasisrealestate.com/zh/fangdichan/chazhao',
     listApi:
-      'https://www.nova-terra.gr/zh/fangdichan/chazhao?listingType=sale&category=residential&region=102&municipality%5B0%5D=0&roomsLow=nd&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&page=', //后面接页码
+      'https://www.plasisrealestate.com/zh/fangdichan/chazhao?listingType=sale&category=residential&propertyTypes%5B%5D=&region=102&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&roomsLow=nd&roomsHigh=nd&floorNumberLow=nd&floorNumberHigh=nd&constructionYearLow=&constructionYearHigh=&heatingControllers=&heatingMedia=', //后面接页码
     enHost: 'https://www.plasisrealestate.com/en',
-    query: {},
-    getMaxPage($) {}
+    query: {
+      listingType: 'sale',
+      category: 'residential',
+      region: '102',
+      priceHigh: '400000',
+      roomsLow: 'nd',
+      floorNumberLow:'nd',
+      floorNumberHigh: 'nd'
+    },
+    getMaxPage($) {
+      return parseInt($('#pagination-info').text().split(' ')[3].trim())
+    },
+    getHouseList($) {
+      return $('.property-list .property-item')
+    },
+    getHouseUrl($, house) {
+      return $(house).attr('href')
+    }
   }
 }

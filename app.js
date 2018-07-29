@@ -9,7 +9,7 @@ _.forIn(sources, (value, key) => {
   if (!value.active) {
     return
   }
-  const { agency, listApi, host, query, getMaxPage } = value
+  const { agency, listApi, host, query, getMaxPage, getHouseList, getHouseUrl } = value
   // const minP = page.min
   // const maxP = page.max + 1
 
@@ -39,12 +39,10 @@ _.forIn(sources, (value, key) => {
         }
         const HouseDealer = mod[key]
         request.get(options).then(($) => {
-          const hosueList = $('#property-listing .listing-item') // .listing-image->url h4>a->名称 .listing-item-code->代码
+          const hosueList = getHouseList($) // .listing-image->url h4>a->名称 .listing-item-code->代码
           const promiseArr = []
           _.forEach(hosueList, (house, index) => {
-            const houseUrl = $(house)
-              .find('.listing-image')
-              .attr('href')
+            const houseUrl = getHouseUrl($, house)
             promiseArr.push(HouseDealer.init(houseUrl).deal())
           })
           Promise.all(promiseArr)
