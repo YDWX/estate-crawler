@@ -11,9 +11,9 @@ module.exports = {
       )
       .then((result) => {
         if (result) {
-          logger.debug(`update success`)
+          logger.debug(` update success`)
         } else {
-          logger.debug(`insert success`)
+          logger.debug(` insert success`)
         }
       })
   },

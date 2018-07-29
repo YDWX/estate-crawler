@@ -22,7 +22,7 @@ const opts = { fields }
 _.forEach(sources, (item) => {
   houseController.getHouses({ agency: item.agency }).then((houses) => {
     if (!houses.length) {
-      logger.info(`no house data in Agency: ${item.agency}`)
+      logger.info(` no house data in Agency: ${item.agency}`)
       return
     }
     const csvOriginData = []
@@ -55,13 +55,13 @@ _.forEach(sources, (item) => {
     })
     fs.writeFile(`./csvResult/${item.agency}-jsonData.json`, JSON.stringify(csvOriginData), 'utf8', (err) => {
       if (err) throw err
-      logger.info(`json data generated for:  ${item.agency}`)
+      logger.info(` json data generated for:  ${item.agency}`)
     })
     const parser = new Json2csvParser(opts)
     const csv = parser.parse(csvOriginData)
     fs.writeFile(`./csvResult/${item.agency}-result.csv`, csv, 'utf8', (err) => {
       if (err) throw err
-      logger.info(`csv data generated for:  ${item.agency}`)
+      logger.info(` csv data generated for:  ${item.agency}`)
     })
   })
 })
