@@ -5,7 +5,7 @@ module.exports = {
     enHost: 'https://www.nova-terra.gr/en',
     host: 'https://www.nova-terra.gr/zh/fangdichan/chazhao',
     listApi:
-      'https://www.nova-terra.gr/zh/fangdichan/chazhao?listingType=sale&category=residential&region=102&municipality%5B0%5D=0&roomsLow=nd&priceHigh=400000&page=', //后面接页码
+      'https://www.nova-terra.gr/zh/fangdichan/chazhao?listingType=sale&category=residential&region=102&municipality%5B0%5D=0&roomsLow=nd&priceHigh=400000&page=', // 后面接页码
     query: {
       listingType: 'sale',
       category: 'residential',
@@ -27,23 +27,24 @@ module.exports = {
     },
     getHouseUrl($, house) {
       return $(house)
-      .find('.listing-image')
-      .attr('href')
+        .find('.listing-image')
+        .attr('href')
     }
   },
   goldenhome: {
     agency: 'goldenhome',
     active: false,
+    host: 'https://goldenhome.gr/property/index?PropertySearch[TrnTypeID]=2&PropertySearch[PropCategID]=11704&PropertySearch[AskedValue_to]=400000&page=920',
     listApi:
-      'https://www.nova-terra.gr/zh/fangdichan/chazhao?listingType=sale&category=residential&region=102&municipality%5B0%5D=0&roomsLow=nd&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&page=', //后面接页码
-    enHost: '',
+      'https://www.nova-terra.gr/zh/fangdichan/chazhao?listingType=sale&category=residential&region=102&municipality%5B0%5D=0&roomsLow=nd&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&page=', // 后面接页码
+    enHost: 'https://goldenhome.gr/site/index?language=en',
     query: {},
     getMaxPage($) {},
     getHouseList() {
 
     },
     getHouseUrl($) {
-      return 
+      // return
     }
   },
   xegr: {
@@ -51,7 +52,7 @@ module.exports = {
     active: false,
     host: '',
     listApi:
-      'https://www.nova-terra.gr/zh/fangdichan/chazhao?listingType=sale&category=residential&region=102&municipality%5B0%5D=0&roomsLow=nd&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&page=', //后面接页码
+      'https://www.nova-terra.gr/zh/fangdichan/chazhao?listingType=sale&category=residential&region=102&municipality%5B0%5D=0&roomsLow=nd&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&page=', // 后面接页码
     enHost: '',
     query: {},
     getMaxPage($) {},
@@ -59,7 +60,7 @@ module.exports = {
 
     },
     getHouseUrl($) {
-      return 
+      // return
     }
   },
   plasisrealestate: {
@@ -67,7 +68,7 @@ module.exports = {
     active: true,
     host: 'https://www.plasisrealestate.com/zh/fangdichan/chazhao',
     listApi:
-      'https://www.plasisrealestate.com/zh/fangdichan/chazhao?listingType=sale&category=residential&propertyTypes%5B%5D=&region=102&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&roomsLow=nd&roomsHigh=nd&floorNumberLow=nd&floorNumberHigh=nd&constructionYearLow=&constructionYearHigh=&heatingControllers=&heatingMedia=', //后面接页码
+      'https://www.plasisrealestate.com/zh/fangdichan/chazhao?listingType=sale&category=residential&propertyTypes%5B%5D=&region=102&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&roomsLow=nd&roomsHigh=nd&floorNumberLow=nd&floorNumberHigh=nd&constructionYearLow=&constructionYearHigh=&heatingControllers=&heatingMedia=', // 后面接页码
     enHost: 'https://www.plasisrealestate.com/en',
     query: {
       listingType: 'sale',
@@ -75,7 +76,7 @@ module.exports = {
       region: '102',
       priceHigh: '400000',
       roomsLow: 'nd',
-      floorNumberLow:'nd',
+      floorNumberLow: 'nd',
       floorNumberHigh: 'nd'
     },
     getMaxPage($) {

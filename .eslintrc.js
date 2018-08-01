@@ -65,6 +65,7 @@ module.exports = {
     'function-paren-newline': ['off'],
     'class-methods-use-this': ['off'],
     'no-mixed-operators': ['off'],
-    'camelcase': ['warn']
+    'camelcase': ['warn'],
+    'radix': ['off']
   }
 }

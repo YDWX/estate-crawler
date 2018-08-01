@@ -1,6 +1,7 @@
 const _ = require('lodash')
 const houseController = require('../controller/houseController')
 const construct = require('./CommonContructor')
+
 const fixed = {
   agency: 'nova-terra',
   contact: '2108983470, 2108943120',
@@ -68,13 +69,13 @@ const parse = ($, _this) => {
       .find('td')
       .text()
     if (_this.zhcnToEn[key]) {
-      if(key=='楼层'){
-        if(!!parseInt(value)){
+      if (key === '楼层') {
+        if (parseInt(value)) {
           _this.houseData.floorCount = value
-        }else{
+        } else {
           _this.houseData.floor = value
         }
-      }else{
+      } else {
         _this.houseData[_this.zhcnToEn[key]] = value
       }
     } else if (_this.allocationAll.includes(key)) {
