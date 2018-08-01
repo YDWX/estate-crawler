@@ -3,6 +3,7 @@ housedata/conf
 housedata/data
 csvResult
 config
+package-lock.json
 # Logs
 logs
 *.log
