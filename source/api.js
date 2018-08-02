@@ -33,18 +33,25 @@ module.exports = {
   },
   goldenhome: {
     agency: 'goldenhome',
-    active: false,
+    active: true,
     host: 'https://goldenhome.gr/property/index?PropertySearch[TrnTypeID]=2&PropertySearch[PropCategID]=11704&PropertySearch[AskedValue_to]=400000&page=920',
     listApi:
       'https://www.nova-terra.gr/zh/fangdichan/chazhao?listingType=sale&category=residential&region=102&municipality%5B0%5D=0&roomsLow=nd&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&page=', // 后面接页码
     enHost: 'https://goldenhome.gr/site/index?language=en',
-    query: {},
-    getMaxPage($) {},
-    getHouseList() {
-
+    query: {
+      'PropertySearch[TrnTypeID]': 2,
+      'PropertySearch[PropCategID]': 11704,
+      'PropertySearch[AskedValue_to]': 400000,
+      page: null // 最多909
     },
-    getHouseUrl($) {
-      // return
+    getMaxPage($) {
+      return 909
+    },
+    getHouseList($) {
+      return $('#feat-listview .item .property-thumb-info-content a')
+    },
+    getHouseUrl($, house) {
+      return `https://+${location.host}+${$(house).attr('href')}`
     }
   },
   xegr: {
@@ -55,17 +62,16 @@ module.exports = {
       'https://www.nova-terra.gr/zh/fangdichan/chazhao?listingType=sale&category=residential&region=102&municipality%5B0%5D=0&roomsLow=nd&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&page=', // 后面接页码
     enHost: '',
     query: {},
-    getMaxPage($) {},
-    getHouseList() {
-
+    getMaxPage($) {
     },
-    getHouseUrl($) {
-      // return
+    getHouseList($) {
+    },
+    getHouseUrl($, house) {
     }
   },
   plasisrealestate: {
     agency: 'plasisrealestate',
-    active: true,
+    active: false,
     host: 'https://www.plasisrealestate.com/zh/fangdichan/chazhao',
     listApi:
       'https://www.plasisrealestate.com/zh/fangdichan/chazhao?listingType=sale&category=residential&propertyTypes%5B%5D=&region=102&priceLow=&priceHigh=400000&livingAreaLow=&livingAreaHigh=&myCode=&roomsLow=nd&roomsHigh=nd&floorNumberLow=nd&floorNumberHigh=nd&constructionYearLow=&constructionYearHigh=&heatingControllers=&heatingMedia=', // 后面接页码
