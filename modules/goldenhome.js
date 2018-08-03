@@ -3,90 +3,51 @@ const houseController = require('../controller/houseController')
 const construct = require('./CommonContructor')
 
 const fixed = {
-  agency: 'plasisrealestate',
-  contact: '302109601909, 302109601609',
+  agency: 'goldenhome',
+  contact: '2111052600, 2111041100',
   unitOfPrice: '€',
   contactName: '',
-  email: 'info@plasis.com.gr',
-  phone: '',
+  email: 'info@goldenhome.gr',
+  phone: '+86 18624069665 （中文热线，可加微信）',
   fax: '',
-  officeLoc: '32, El. Venizelou Str, 166 75 Glyfada, Athens'
+  officeLoc: ''
 }
 const parse = ($, _this) => {
-  const price = $('.price')
+  const price = $($('.content.col-md-6 span')[1])
     .text()
-    .substr(2)
-  const houseId = $('.property-code')
+    .match(/\d+/)[0]
+  const houseId = $($('.content.col-md-6 span')[0])
     .text()
-    .substring(3)
+    .match(/\d+/)[0]
   // 复式公寓 出售 Center (Voula), € 280,000, 110 平方米 -> ["复式公寓", "出售", "Center", "(Voula),", "€", "280,000,", "110", "平方米"]
-  const titleArr = $('.property-content h1')
+  const titleArr = $('.pgl-detail h4')
     .text()
     .split(' ')
-  const name = titleArr[0] + titleArr[1]
-  const size = parseInt(
-    $('.area')
-      .text()
-      .replace(' 平方米', '')
-  )
-  const imgsEle = $('.swiper-lazy')
+  const name = titleArr[2] + titleArr[0]
+  const size = parseInt(titleArr[3])
+  const imgsEle = $('.slides img')
   const picGallery = []
   _.forEach(imgsEle, (imgele) => {
-    picGallery.push(
-      $(imgele)
-        .attr('data-background')
-        .split('?')[0]
-    )
+    picGallery.push(`https://goldenhome.gr${$(imgele).attr('src')}`)
   })
   _this.houseData.picGallery = picGallery
-  // for (var i = 0; i < imgsEle.length; i++) {
-  //   picGallery.push($(imgsEle[i]).attr('src'))
-  // }
-  const fixedChange = {
-    contact: $('.fa-phone')
-      .parent()
-      .text()
-      .trim(),
-    email: $($('.fa-envelope').parent()[0])
-      .text()
-      .trim(),
-    officeLoc: $('.fa-map-marker')
-      .parent()
-      .text()
-      .trim()
-  }
-  _this.fixed = Object.assign(_this.fixed, fixedChange)
-  const propertiesTrs = $('.info-table tr')
+
+  const propertiesTrs = $('.list-cat li')
   const curAllo = [] // 存储现有配置
   _.forEach(propertiesTrs, (item) => {
     const key = $(item)
-      .find('th')
+      .find('strong')
       .text()
     const value = $(item)
-      .find('td')
       .text()
+      .split(' ')[1]
     if (_this.zhcnToEn[key]) {
-      if (key === '楼层') {
-        if (parseInt(value)) {
-          _this.houseData.floorCount = value
-        } else {
-          _this.houseData.floor = value
-        }
-      } else {
-        _this.houseData[_this.zhcnToEn[key]] = value
-      }
+      _this.houseData[_this.zhcnToEn[key]] = value
     } else if (_this.allocationAll.includes(key)) {
-      curAllo.push(key)
+      curAllo.push(key + ' ' + value ? value : 0)
     }
   })
 
-  const propertyAmenities = $('.property-amenities li')
-  _.forEach(propertyAmenities, (item) => {
-    const onePro = $(item)
-      .text()
-      .replace(/ |\n/g, '')
-    curAllo.push(onePro)
-  })
   const currentValue = {
     allocation: curAllo,
     price,

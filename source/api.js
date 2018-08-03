@@ -42,6 +42,7 @@ module.exports = {
       'PropertySearch[TrnTypeID]': 2,
       'PropertySearch[PropCategID]': 11704,
       'PropertySearch[AskedValue_to]': 400000,
+      language: 'cn',
       page: null // 最多909
     },
     getMaxPage($) {
@@ -51,7 +52,7 @@ module.exports = {
       return $('#feat-listview .item .property-thumb-info-content a')
     },
     getHouseUrl($, house) {
-      return `https://+${location.host}+${$(house).attr('href')}`
+      return `https://goldenhome.gr${$(house).attr('href')}?language=cn`
     }
   },
   xegr: {

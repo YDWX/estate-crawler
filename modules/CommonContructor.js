@@ -9,7 +9,7 @@ class NovaTerra {
     
     this.fixed = fixed
     this.parseFunc = parseFunc
-    this.allocationAll = ['停车位', '厨房', '客厅', '浴室', '洗手间', '', '']
+    this.allocationAll = ['停车位', '厨房', '客厅', '浴室', '洗手间', '总浴室', '总Wc', '停车总数'] // 6-8是goldenhome的
     this.zhcnToEn = {
       每平方米价格: 'priceperm',
       街区: 'place',
@@ -17,7 +17,13 @@ class NovaTerra {
       楼层: 'floor',
       建造年份: 'buildYear',
       供暖系统: 'warmSys',
-      情况: 'condition'
+      情况: 'condition',
+      // 下面是goldenhome添加的
+      '区:': 'place',
+      '房间总数:': 'roomCount',
+      '楼层号:': 'floor',
+      '建成年份:': 'buildYear',
+      '装修年份:': 'decorateYear'
     }
     this.houseData = {
       name: '',
@@ -39,6 +45,7 @@ class NovaTerra {
       roomCount: '', //房间数
       kind: '', // 房屋分类
       buildYear: '', // 建造年份
+      decorateYear: '', // 装修年份，只有goldenhome有
       floor: '', // 楼层
       floorCount: '',// 楼层数
       detail: '', // 详细信息以table的html先存储，同时进行分析
@@ -70,6 +77,8 @@ class NovaTerra {
   deal() {
     return this.getFromUrl(this.url).then(($) => {
       return this.parse($)
+    }).catch((err)=>{
+      // console.log(err)
     })
   }
 }
