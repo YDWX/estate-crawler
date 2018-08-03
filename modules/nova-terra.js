@@ -76,7 +76,7 @@ const parse = ($, _this) => {
           _this.houseData.floor = value
         }
       } else {
-        _this.houseData[_this.zhcnToEn[key]] = value
+        _this.houseData[_this.zhcnToEn[key]] = value? value:'没有数据'
       }
     } else if (_this.allocationAll.includes(key)) {
       curAllo.push(key)

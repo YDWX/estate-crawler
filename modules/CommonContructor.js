@@ -9,7 +9,7 @@ class NovaTerra {
     
     this.fixed = fixed
     this.parseFunc = parseFunc
-    this.allocationAll = ['停车位', '厨房', '客厅', '浴室', '洗手间', '总浴室', '总Wc', '停车总数'] // 6-8是goldenhome的
+    this.allocationAll = ['停车位', '厨房', '客厅', '浴室', '洗手间', '总浴室:', '总Wc:', '停车总数:'] // 6-8是goldenhome的
     this.zhcnToEn = {
       每平方米价格: 'priceperm',
       街区: 'place',

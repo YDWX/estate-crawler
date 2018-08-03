@@ -19,7 +19,7 @@ module.exports = {
   roomCount: String, //房间数
   kind: String, // 房屋分类
   buildYear: String, // 建造年份
-  buildYear: String, // 装修年份，只有goldenhome有
+  decorateYear: String, // 装修年份，只有goldenhome有
   floor: String, // 楼层
   floorCount: String, // 楼层
   detail: String, // 详细信息以table的html先存储，同时进行分析

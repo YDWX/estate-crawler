@@ -21,7 +21,7 @@ const opts = { fields }
 // ]
 _.forEach(sources, (item) => {
   houseController.getHouses({ agency: item.agency }).then((houses) => {
-    if (!houses.length) {
+    if (!item.active||!houses.length) {
       logger.info(` no house data in Agency: ${item.agency}`)
       return
     }
