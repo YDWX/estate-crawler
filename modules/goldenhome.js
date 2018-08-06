@@ -25,10 +25,10 @@ const parse = ($, _this) => {
     .split(' ')
   const name = titleArr[2] + titleArr[0]
   const size = parseInt(titleArr[3])
-  const imgsEle = $('.slides img')
+  const imgsEle = $('#slider img')
   const picGallery = []
   _.forEach(imgsEle, (imgele) => {
-    picGallery.push(`https://goldenhome.gr${$(imgele).attr('src')}`)
+    picGallery.push(`https://goldenhome.gr${$(imgele).attr('data-original')}`)
   })
   _this.houseData.picGallery = picGallery
 
@@ -42,9 +42,9 @@ const parse = ($, _this) => {
       .text()
       .split(' ')[1]
     if (_this.zhcnToEn[key]) {
-      _this.houseData[_this.zhcnToEn[key]] = value? value:'没有数据'
+      _this.houseData[_this.zhcnToEn[key]] = value? value:'暂无数据'
     } else if (_this.allocationAll.includes(key)) {
-      curAllo.push(key + ' ' + (value ? value : 0))
+      curAllo.push(key + ' ' + (value ? value : '暂无数据'))
     }
   })
 

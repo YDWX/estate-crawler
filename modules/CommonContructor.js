@@ -1,6 +1,6 @@
 const cheerio = require('cheerio')
 const request = require('request-promise')
-
+const logger = require('../logger')
 
 class NovaTerra {
   constructor(parseFunc, fixed) {
@@ -78,7 +78,7 @@ class NovaTerra {
     return this.getFromUrl(this.url).then(($) => {
       return this.parse($)
     }).catch((err)=>{
-      // console.log(err)
+      logger.error('信息 获取 失败');
     })
   }
 }

@@ -4,6 +4,7 @@ const _ = require('lodash')
 const sources = require('./source/api')
 const mongoose = require('./models/index')
 const mod = require('./modules')
+const logger = require('./logger')
 
 _.forIn(sources, (value, key) => {
   if (!value.active) {
@@ -46,6 +47,8 @@ _.forIn(sources, (value, key) => {
             promiseArr.push(HouseDealer.init(houseUrl).deal())
           })
           Promise.all(promiseArr)
+        }).catch((err) => {
+          logger.error('获取 房屋 列表 失败');
         })
       })
     })
